@@ -10,6 +10,15 @@ namespace ShippingPromotionProjectConsole
     public class TestPromotionStrategy
     {
 
+        [SetUp]
+
+        public void RunInit()
+        {
+
+
+
+        }
+
         [TestCase]
         public void FirstTest()
         {
@@ -27,10 +36,44 @@ namespace ShippingPromotionProjectConsole
 
             Assert.AreEqual(cartPrice.CalculateInvoice(), 100);
 
+      }
 
 
+        [TestCase]
+        public void SecondTest()
+        {
+            Cart newCart = new Cart();
 
+            newCart.AQty = 5;
+            newCart.BQty = 5;
+            newCart.CQty = 1;
 
+            newCart.ApplyPromotions(new AStartegy());
+            newCart.ApplyPromotions(new BStartegy());
+            newCart.ApplyPromotions(new CDStartegy());
+
+            CartPrice cartPrice = CartPrice.getInstance();
+
+            Assert.AreEqual(cartPrice.CalculateInvoice(), 370);
+
+        }
+
+        [TestCase]
+        public void ThirdTest()
+        {
+            Cart newCart = new Cart();
+
+            newCart.AQty = 3;
+            newCart.BQty = 5;
+            newCart.CQty = 1;
+            newCart.DQty = 1;
+            newCart.ApplyPromotions(new AStartegy());
+            newCart.ApplyPromotions(new BStartegy());
+            newCart.ApplyPromotions(new CDStartegy());
+
+            CartPrice cartPrice = CartPrice.getInstance();
+
+            Assert.AreEqual(cartPrice.CalculateInvoice(), 280);
 
         }
 
